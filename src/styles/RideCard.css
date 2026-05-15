@@ -1,0 +1,228 @@
+.ride-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid transparent;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ride-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.ride-card--pending { border-left-color: var(--gold); }
+.ride-card--accepted { border-left-color: var(--success); }
+.ride-card--declined { border-left-color: var(--error); }
+
+/* Header */
+.ride-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.ride-card__id-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.ride-card__id {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.ride-card__time {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* Status */
+.ride-card__status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.ride-card__status--pending {
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--gold-dark);
+}
+
+.ride-card__status--accepted {
+  background: rgba(16, 185, 129, 0.12);
+  color: #065f46;
+}
+
+.ride-card__status--declined {
+  background: rgba(239, 68, 68, 0.12);
+  color: #991b1b;
+}
+
+/* Route */
+.ride-card__route {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  background: var(--cream);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+}
+
+.ride-card__loc {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.ride-card__loc-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.ride-card__loc-dot--from { background: var(--gold); }
+.ride-card__loc-dot--to { background: var(--navy); }
+
+.ride-card__loc-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 1px;
+}
+
+.ride-card__loc-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.ride-card__route-line {
+  width: 2px;
+  height: 16px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--text-light) 0,
+    var(--text-light) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  margin-left: 4px;
+}
+
+/* Meta */
+.ride-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.ride-card__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--cream);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+
+/* Notes */
+.ride-card__notes {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-style: italic;
+}
+
+/* Customer */
+.ride-card__customer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(10, 22, 40, 0.04);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(10, 22, 40, 0.08);
+}
+
+.ride-card__customer-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ride-card__customer-phone {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Actions */
+.ride-card__actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.ride-card__btn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--transition-base);
+}
+
+.ride-card__btn--accept {
+  background: var(--success);
+  color: white;
+  border-color: var(--success);
+}
+
+.ride-card__btn--accept:hover {
+  background: #059669;
+  border-color: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.ride-card__btn--decline {
+  background: transparent;
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.ride-card__btn--decline:hover {
+  background: var(--error);
+  color: white;
+  transform: translateY(-1px);
+}

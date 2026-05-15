@@ -1,0 +1,36 @@
+.packages-hero,
+.contact-hero,
+.about-hero,
+.booking-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  padding: var(--space-4xl) 0 var(--space-3xl);
+  text-align: center;
+}
+
+.packages-hero .section-title,
+.contact-hero .section-title,
+.about-hero .section-title,
+.booking-hero .section-title {
+  color: var(--white);
+}
+
+.packages-hero .section-subtitle,
+.contact-hero .section-subtitle,
+.about-hero .section-subtitle,
+.booking-hero .section-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+@media (max-width: 1024px) {
+  .packages-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .packages-grid { grid-template-columns: 1fr; }
+}
