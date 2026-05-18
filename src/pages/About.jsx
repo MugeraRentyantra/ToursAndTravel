@@ -4,34 +4,34 @@ const team = [
   {
     name: 'Dhananjay',
     role: 'Founder & CEO',
-    bio: '20+ years shaping unforgettable travel experiences across 40+ countries.',
+    bio: '8+ years of experience in travel and transport across Maharashtra. Passionate about making travel safe and accessible for all.',
     img: null,
-    initial: 'A',
+    initial: 'D',
     color: '#c9a84c',
   },
   {
     name: 'Yogesh',
     role: 'Head of Operations',
-    bio: 'Master logistics expert ensuring every trip runs seamlessly from start to finish.',
+    bio: 'Manages the entire fleet and driver team. Ensures every trip runs smoothly from pickup to drop.',
     img: null,
-    initial: 'M',
+    initial: 'Y',
     color: '#0a7ea4',
   },
   {
     name: 'Namira',
-    role: 'Lead Travel Consultant',
-    bio: 'Passionate explorer who has visited 60+ destinations and loves personalizing trips.',
+    role: 'Customer Relations',
+    bio: 'The friendly voice behind every booking. Dedicated to ensuring every traveler has a wonderful experience.',
     img: null,
-    initial: 'R',
+    initial: 'N',
     color: '#10b981',
   },
 ];
 
 const milestones = [
-  { year: '2016', title: 'Company Founded', desc: 'Started with a team of 3 and a dream to make travel accessible and extraordinary.' },
-  { year: '2018', title: 'Expanded to 20 Destinations', desc: 'Grew our portfolio to cover Southeast Asia, Europe, and across India.' },
-  { year: '2021', title: 'Launched Ride Services', desc: 'Added premium airport transfers and city rides to complement our tour packages.' },
-  { year: '2024', title: '10,000 Happy Travelers', desc: 'A proud milestone — serving thousands of satisfied travelers and counting.' },
+  { year: '2018', title: 'Company Founded', desc: 'Swaranjali Travels started with 2 cars and a vision to provide reliable, comfortable rides from Karad.' },
+  { year: '2020', title: 'Fleet Expansion', desc: 'Grew to 8+ vehicles including Innova Crysta, Tempo Traveller, and multiple sedan options.' },
+  { year: '2022', title: 'Tour Packages Launched', desc: 'Introduced curated tour packages to popular destinations across Maharashtra and Karnataka.' },
+  { year: '2025', title: '500+ Happy Trips', desc: 'Crossed the milestone of 500+ successful trips with 10,000+ satisfied travelers.' },
 ];
 
 export default function About() {
@@ -41,10 +41,10 @@ export default function About() {
       <section className="about-hero">
         <div className="container about-hero__inner">
           <span className="section-badge">🌐 Our Story</span>
-          <h1 className="section-title">We Are Wanderlust</h1>
+          <h1 className="section-title">We Are Swaranjali Travels</h1>
           <div className="divider" />
           <p className="section-subtitle">
-            Born from a passion for exploration, built on trust and excellence.
+            प्रवास तुमचा जबाबदारी आमची — Your journey is our responsibility.
           </p>
         </div>
       </section>
@@ -54,33 +54,33 @@ export default function About() {
         <div className="container about-story">
           <div className="about-story__text">
             <span className="section-badge">Our Mission</span>
-            <h2 className="section-title">Travel Should Be Transformative</h2>
+            <h2 className="section-title">Safe, Comfortable Travel for Everyone</h2>
             <div className="divider left" />
             <p>
-              At Wanderlust Travel & Rides, we believe that every journey has the power to change you. Founded in 2016, we've been crafting unforgettable travel experiences for thousands of adventurers, honeymooners, families, and solo explorers.
+              At Swaranjali Travels, we believe that every journey should be safe, comfortable, and worry-free. Founded in Karad, Maharashtra, we've been providing premium ride services with professional drivers to thousands of travelers across the state.
             </p>
             <p style={{ marginTop: '1rem' }}>
-              We are not just a travel agency — we are your travel companion. From the moment you book to the moment you return home, our dedicated team ensures every detail is perfect, every surprise is delightful, and every memory is priceless.
+              We are not just a car rental company — we are your travel partner. From the moment you book to the moment you arrive, our dedicated team ensures every detail is handled with care. Every vehicle comes with a verified, experienced driver at no extra cost.
             </p>
             <p style={{ marginTop: '1rem' }}>
-              Our premium ride service extends the same philosophy — reliable, comfortable, and always on time. Whether it's an airport transfer or a cross-city journey, we deliver with excellence.
+              Our fleet includes everything from compact hatchbacks for city rides to spacious Tempo Travellers for group pilgrimages and tours. Whatever your travel need, Swaranjali Travels has you covered.
             </p>
           </div>
           <div className="about-story__visual">
             <div className="about-story__card about-story__card--1">
-              <span className="about-story__card-icon">🌍</span>
-              <h4>50+ Destinations</h4>
-              <p>Across Asia, Europe & India</p>
+              <span className="about-story__card-icon">🚗</span>
+              <h4>8+ Vehicles</h4>
+              <p>From Swift to Tempo Traveller</p>
             </div>
             <div className="about-story__card about-story__card--2">
               <span className="about-story__card-icon">⭐</span>
               <h4>4.9 / 5 Rating</h4>
-              <p>From 2000+ verified reviews</p>
+              <p>From 500+ satisfied travelers</p>
             </div>
             <div className="about-story__card about-story__card--3">
-              <span className="about-story__card-icon">🏆</span>
-              <h4>Award Winning</h4>
-              <p>Best Travel Agency 2023</p>
+              <span className="about-story__card-icon">🧑‍✈️</span>
+              <h4>Driver Included</h4>
+              <p>With every single booking</p>
             </div>
           </div>
         </div>
@@ -117,9 +117,9 @@ export default function About() {
         <div className="container">
           <div className="text-center">
             <span className="section-badge">👥 Meet the Team</span>
-            <h2 className="section-title">The People Behind Wanderlust</h2>
+            <h2 className="section-title">The People Behind Swaranjali Travels</h2>
             <div className="divider" />
-            <p className="section-subtitle">Passionate travelers who live to create extraordinary journeys for you.</p>
+            <p className="section-subtitle">Dedicated professionals who make every journey memorable.</p>
           </div>
           <div className="team-grid">
             {team.map(({ name, role, bio, initial, color }) => (

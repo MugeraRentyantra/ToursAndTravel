@@ -1,19 +1,16 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useRides } from '../context/RideContext';
+import { vehicles } from '../data/vehicles';
+import PolicySection from '../components/PolicySection';
 import '../styles/Booking.css';
 
 const today = new Date().toISOString().split('T')[0];
 
-const vehicles = [
-  { id: 'Hatchback', label: 'Hatchback', icon: '🚗', image: '/hatchback.png', desc: 'Compact & affordable', seats: 'Up to 4' },
-  { id: 'Sedan', label: 'Sedan', icon: '🚙', image: '/sedan.png', desc: 'Comfort & style', seats: 'Up to 4' },
-  { id: 'SUV', label: 'SUV', icon: '🚐', image: '/suv.png', desc: 'Space & luxury', seats: 'Up to 7' },
-  { id: 'Force-Traveller', label: 'Force-Traveller', icon: '🚌', image: '/force_traveller.png', desc: 'Space & luxury', seats: 'Up to 20' }
-];
-
 const initialForm = {
   pickup: '', drop: '', date: '', time: '',
-  vehicle: 'Sedan', fullName: '', phone: '',
+  vehicle: 'swift-dzire', fullName: '', address: '',
+  phone: '', altPhone: '',
   passengers: 1, notes: '',
 };
 
@@ -24,20 +21,28 @@ function validate(form) {
   if (!form.date) errs.date = 'Date is required.';
   if (!form.time) errs.time = 'Time is required.';
   if (!form.fullName.trim()) errs.fullName = 'Full name is required.';
-  if (!form.phone.trim()) errs.phone = 'Phone number is required.';
-  else if (!/^\d{10}$/.test(form.phone.replace(/\s/g, ''))) errs.phone = 'Enter a valid 10-digit phone number.';
+  if (!form.address.trim()) errs.address = 'Address is required.';
+  if (!form.phone.trim()) errs.phone = 'Contact number is required.';
+  else if (!/^\d{10}$/.test(form.phone.replace(/\s/g, ''))) errs.phone = 'Enter a valid 10-digit number.';
+  if (!form.altPhone.trim()) errs.altPhone = 'Alternate contact is required.';
+  else if (!/^\d{10}$/.test(form.altPhone.replace(/\s/g, ''))) errs.altPhone = 'Enter a valid 10-digit number.';
   return errs;
 }
 
 function generateId() {
-  return 'WL-' + Math.floor(100000 + Math.random() * 900000);
+  return 'ST-' + Math.floor(100000 + Math.random() * 900000);
 }
 
 export default function Booking({ addToast }) {
   const { addRide } = useRides();
-  const [form, setForm] = useState(initialForm);
+  const location = useLocation();
+  const preselectedVehicle = location.state?.vehicleId || 'swift-dzire';
+
+  const [form, setForm] = useState({ ...initialForm, vehicle: preselectedVehicle });
   const [errors, setErrors] = useState({});
   const [confirmed, setConfirmed] = useState(null);
+
+  const selectedVehicle = vehicles.find((v) => v.id === form.vehicle) || vehicles[0];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,6 +64,7 @@ export default function Booking({ addToast }) {
       id: generateId(),
       status: 'pending',
       passengers: Number(form.passengers),
+      vehicleName: selectedVehicle.name,
       createdAt: new Date().toISOString(),
     };
     addRide(ride);
@@ -73,7 +79,7 @@ export default function Booking({ addToast }) {
           <div className="confirmation">
             <div className="confirmation__icon">✓</div>
             <h2 className="confirmation__title">Booking Confirmed!</h2>
-            <p className="confirmation__sub">Your ride has been successfully booked.</p>
+            <p className="confirmation__sub">Your ride has been successfully booked with Swaranjali Travels.</p>
             <div className="confirmation__id">
               Booking ID: <strong>{confirmed.id}</strong>
             </div>
@@ -81,10 +87,15 @@ export default function Booking({ addToast }) {
               <div className="confirmation__row"><span>Pickup</span><span>{confirmed.pickup}</span></div>
               <div className="confirmation__row"><span>Drop</span><span>{confirmed.drop}</span></div>
               <div className="confirmation__row"><span>Date & Time</span><span>{confirmed.date} at {confirmed.time}</span></div>
-              <div className="confirmation__row"><span>Vehicle</span><span>{confirmed.vehicle}</span></div>
+              <div className="confirmation__row"><span>Vehicle</span><span>{confirmed.vehicleName}</span></div>
               <div className="confirmation__row"><span>Passengers</span><span>{confirmed.passengers}</span></div>
               <div className="confirmation__row"><span>Name</span><span>{confirmed.fullName}</span></div>
-              <div className="confirmation__row"><span>Phone</span><span>{confirmed.phone}</span></div>
+              <div className="confirmation__row"><span>Address</span><span>{confirmed.address}</span></div>
+              <div className="confirmation__row"><span>Contact</span><span>{confirmed.phone}</span></div>
+              <div className="confirmation__row"><span>Alt. Contact</span><span>{confirmed.altPhone}</span></div>
+              <div className="confirmation__row confirmation__row--highlight">
+                <span>🧑‍✈️ Driver</span><span>Included ✓</span>
+              </div>
               {confirmed.notes && <div className="confirmation__row"><span>Notes</span><span>{confirmed.notes}</span></div>}
             </div>
             <div className="confirmation__actions">
@@ -106,10 +117,20 @@ export default function Booking({ addToast }) {
     <div className="booking-page">
       <section className="booking-hero">
         <div className="container booking-hero__inner">
-          <span className="section-badge">🚗 Ride Service</span>
-          <h1 className="section-title">Book a Premium Ride</h1>
+          <span className="section-badge">🚗 Swaranjali Travels</span>
+          <h1 className="section-title">Book Your Ride</h1>
           <div className="divider" />
-          <p className="section-subtitle">Safe, comfortable, and always on time — your journey starts here.</p>
+          <p className="section-subtitle">Safe, comfortable, and always on time — प्रवास तुमचा जबाबदारी आमची</p>
+        </div>
+      </section>
+
+      {/* Driver Included Banner */}
+      <section className="booking-driver-banner">
+        <div className="container">
+          <div className="booking-driver-banner__inner">
+            <span>🧑‍✈️</span>
+            <span>✅ Professional driver included with every booking — no extra charges!</span>
+          </div>
         </div>
       </section>
 
@@ -123,12 +144,12 @@ export default function Booking({ addToast }) {
               <div className="booking-form__grid">
                 <div className="form-group">
                   <label className="form-label" htmlFor="pickup">Pickup Location *</label>
-                  <input id="pickup" name="pickup" className={`form-input${errors.pickup ? ' error' : ''}`} placeholder="e.g. Airport Terminal 2" value={form.pickup} onChange={handleChange} />
+                  <input id="pickup" name="pickup" className={`form-input${errors.pickup ? ' error' : ''}`} placeholder="e.g. Karad Bus Stand" value={form.pickup} onChange={handleChange} />
                   {errors.pickup && <span className="form-error">{errors.pickup}</span>}
                 </div>
                 <div className="form-group">
                   <label className="form-label" htmlFor="drop">Drop Location *</label>
-                  <input id="drop" name="drop" className={`form-input${errors.drop ? ' error' : ''}`} placeholder="e.g. The Leela Hotel" value={form.drop} onChange={handleChange} />
+                  <input id="drop" name="drop" className={`form-input${errors.drop ? ' error' : ''}`} placeholder="e.g. Pune Airport" value={form.drop} onChange={handleChange} />
                   {errors.drop && <span className="form-error">{errors.drop}</span>}
                 </div>
                 <div className="form-group">
@@ -148,19 +169,19 @@ export default function Booking({ addToast }) {
             <div className="booking-form__section">
               <h3 className="booking-form__section-title">🚗 Choose Your Vehicle</h3>
               <div className="vehicle-selector">
-                {vehicles.map(({ id, label, icon, image, desc, seats }) => (
+                {vehicles.map((v) => (
                   <button
-                    key={id}
+                    key={v.id}
                     type="button"
-                    className={`vehicle-card${form.vehicle === id ? ' vehicle-card--selected' : ''}`}
-                    onClick={() => handleVehicle(id)}
+                    className={`vehicle-card${form.vehicle === v.id ? ' vehicle-card--selected' : ''}`}
+                    onClick={() => handleVehicle(v.id)}
                   >
                     <div className="vehicle-card__image-container">
-                      <img src={image} alt={label} className="vehicle-card__img" />
+                      <img src={v.image} alt={v.name} className="vehicle-card__img" onError={(e) => { e.target.src = '/suv.png'; }} />
                     </div>
-                    <span className="vehicle-card__label">{label}</span>
-                    <span className="vehicle-card__desc">{desc}</span>
-                    <span className="vehicle-card__seats">{seats}</span>
+                    <span className="vehicle-card__label">{v.name}</span>
+                    <span className="vehicle-card__desc">{v.type} · {v.seats} seater</span>
+                    <span className="vehicle-card__seats">{v.ac ? '❄️ AC' : 'Non-AC'}</span>
                   </button>
                 ))}
               </div>
@@ -176,13 +197,23 @@ export default function Booking({ addToast }) {
                   {errors.fullName && <span className="form-error">{errors.fullName}</span>}
                 </div>
                 <div className="form-group">
-                  <label className="form-label" htmlFor="phone">Phone Number *</label>
+                  <label className="form-label" htmlFor="address">Address *</label>
+                  <input id="address" name="address" className={`form-input${errors.address ? ' error' : ''}`} placeholder="Your full address" value={form.address} onChange={handleChange} />
+                  {errors.address && <span className="form-error">{errors.address}</span>}
+                </div>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="phone">Contact Number *</label>
                   <input id="phone" name="phone" type="tel" className={`form-input${errors.phone ? ' error' : ''}`} placeholder="10-digit mobile number" value={form.phone} onChange={handleChange} />
                   {errors.phone && <span className="form-error">{errors.phone}</span>}
                 </div>
                 <div className="form-group">
+                  <label className="form-label" htmlFor="altPhone">Alternate Contact Number *</label>
+                  <input id="altPhone" name="altPhone" type="tel" className={`form-input${errors.altPhone ? ' error' : ''}`} placeholder="Alternate 10-digit number" value={form.altPhone} onChange={handleChange} />
+                  {errors.altPhone && <span className="form-error">{errors.altPhone}</span>}
+                </div>
+                <div className="form-group">
                   <label className="form-label" htmlFor="passengers">Passengers</label>
-                  <input id="passengers" name="passengers" type="number" min={1} max={8} className="form-input" value={form.passengers} onChange={handleChange} />
+                  <input id="passengers" name="passengers" type="number" min={1} max={selectedVehicle.seats} className="form-input" value={form.passengers} onChange={handleChange} />
                 </div>
               </div>
               <div className="form-group" style={{ marginTop: '1rem' }}>
@@ -195,6 +226,9 @@ export default function Booking({ addToast }) {
               Confirm Booking →
             </button>
           </form>
+
+          {/* Policy Section */}
+          <PolicySection />
         </div>
       </section>
     </div>

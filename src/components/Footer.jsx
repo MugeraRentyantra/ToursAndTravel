@@ -7,6 +7,7 @@ export default function Footer() {
   const quickLinks = [
     { to: '/', label: 'Home' },
     { to: '/packages', label: 'Tour Packages' },
+    { to: '/fleet', label: 'Our Fleet' },
     { to: '/about', label: 'About Us' },
     { to: '/contact', label: 'Contact' },
     { to: '/booking', label: 'Book a Ride' },
@@ -14,18 +15,18 @@ export default function Footer() {
 
   const services = [
     'Airport Transfers',
-    'City Tours',
+    'Outstation Rides',
     'Corporate Rides',
-    'Adventure Packages',
-    'Honeymoon Packages',
+    'Wedding Transport',
+    'Pilgrimage Tours',
     'Group Tours',
   ];
 
   const contacts = [
-    { icon: '📍', text: '42 Travel Lane, New Delhi, India 110001' },
+    { icon: '📍', text: 'Proton Office, Saidpur, Karad' },
     { icon: '📞', text: '+91 98765 43210' },
-    { icon: '✉️', text: 'hello@wanderlust.travel' },
-    { icon: '🕐', text: 'Mon–Sat: 9:00 AM – 8:00 PM' },
+    { icon: '✉️', text: 'proton@gmail.com' },
+    { icon: '🕐', text: 'Mon–Sat: 10:00 AM – 6:00 PM' },
   ];
 
   return (
@@ -33,21 +34,28 @@ export default function Footer() {
       <div className="footer__main container">
         <div className="footer__col footer__col--brand">
           <Link to="/" className="footer__logo">
-            <span className="footer__logo-icon">✈</span>
-            <span>Wanderlust<span className="text-gold"> Travel</span></span>
+            <span className="footer__logo-icon">🚗</span>
+            <span>Swaranjali<span className="text-gold"> Travels</span></span>
           </Link>
           <p className="footer__tagline">
-            Your trusted partner for extraordinary journeys. We craft unforgettable travel experiences across the globe.
+            प्रवास तुमचा जबाबदारी आमची
+          </p>
+          <p className="footer__tagline-sub">
+            Your trusted partner for safe, comfortable travel across Maharashtra & Karnataka.
           </p>
           <div className="footer__socials">
-            {['facebook', 'instagram', 'twitter', 'youtube'].map((s) => (
-              <a key={s} href="#" className="footer__social" aria-label={s}>
-                {s === 'facebook' && '𝒇'}
-                {s === 'instagram' && '📷'}
-                {s === 'twitter' && '𝕏'}
-                {s === 'youtube' && '▶'}
-              </a>
-            ))}
+            <a href="https://facebook.com/swaranjalitravels" className="footer__social" aria-label="facebook" target="_blank" rel="noopener noreferrer">
+              𝒇
+            </a>
+            <a href="https://instagram.com/swaranjalitravels" className="footer__social" aria-label="instagram" target="_blank" rel="noopener noreferrer">
+              📷
+            </a>
+            <a href="https://twitter.com/swaranjalitravels" className="footer__social" aria-label="twitter" target="_blank" rel="noopener noreferrer">
+              𝕏
+            </a>
+            <a href="https://youtube.com/@swaranjalitravels" className="footer__social" aria-label="youtube" target="_blank" rel="noopener noreferrer">
+              ▶
+            </a>
           </div>
         </div>
 
@@ -88,11 +96,11 @@ export default function Footer() {
 
       <div className="footer__bottom">
         <div className="container footer__bottom-inner">
-          <p>© {currentYear} Wanderlust Travel & Rides. All rights reserved.</p>
+          <p>© {currentYear} Swaranjali Travels. All rights reserved.</p>
           <div className="footer__bottom-links">
+            <Link to="/booking" className="footer__bottom-link">Booking Policy</Link>
             <a href="#" className="footer__bottom-link">Privacy Policy</a>
             <a href="#" className="footer__bottom-link">Terms of Service</a>
-            <a href="#" className="footer__bottom-link">Cookie Policy</a>
           </div>
         </div>
       </div>

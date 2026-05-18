@@ -3,6 +3,47 @@
   background: var(--cream);
 }
 
+/* Hero */
+.booking-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  padding: var(--space-4xl) 0 var(--space-3xl);
+  text-align: center;
+}
+
+.booking-hero .section-title {
+  color: var(--white);
+}
+
+.booking-hero .section-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Driver Included Banner */
+.booking-driver-banner {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.03));
+  border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+  padding: var(--space-md) 0;
+}
+
+.booking-driver-banner__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #065f46;
+}
+
+/* Confirmation highlight row */
+.confirmation__row--highlight {
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.confirmation__row--highlight span:last-child {
+  color: #065f46;
+}
+
 /* Form Card */
 .booking-form {
   background: var(--white);
@@ -40,7 +81,7 @@
 /* Vehicle Selector */
 .vehicle-selector {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-md);
 }
 
@@ -213,6 +254,10 @@
   gap: var(--space-md);
   justify-content: center;
   flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .vehicle-selector { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {

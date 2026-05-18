@@ -19,7 +19,16 @@ export default function RideCard({ ride, onStatusChange }) {
     });
   };
 
-  const vehicleIcons = { Hatchback: '🚗', Sedan: '🚙', SUV: '🚐' };
+  const vehicleIcons = {
+    'innova': '🚐',
+    'innova-crysta': '🚐',
+    'swift': '🚗',
+    'swift-dzire': '🚙',
+    'i10': '🚗',
+    'tempo-traveller': '🚌',
+    'toyota-rumion': '🚐',
+    'kia-carens': '🚐',
+  };
 
   return (
     <div className={`ride-card ride-card--${ride.status}`}>
@@ -56,7 +65,7 @@ export default function RideCard({ ride, onStatusChange }) {
           🗓 {ride.date} · {ride.time}
         </span>
         <span className="ride-card__meta-item">
-          {vehicleIcons[ride.vehicle] || '🚗'} {ride.vehicle}
+          {vehicleIcons[ride.vehicle] || '🚗'} {ride.vehicleName || ride.vehicle}
         </span>
         <span className="ride-card__meta-item">
           👥 {ride.passengers} passenger{ride.passengers !== 1 ? 's' : ''}
@@ -72,6 +81,8 @@ export default function RideCard({ ride, onStatusChange }) {
       <div className="ride-card__customer">
         <span className="ride-card__customer-name">👤 {ride.fullName}</span>
         <span className="ride-card__customer-phone">📞 {ride.phone}</span>
+        {ride.altPhone && <span className="ride-card__customer-phone">📱 {ride.altPhone} (alt)</span>}
+        {ride.address && <span className="ride-card__customer-phone">📍 {ride.address}</span>}
       </div>
 
       {ride.status === 'pending' && (

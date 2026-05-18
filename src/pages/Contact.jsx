@@ -19,10 +19,10 @@ function validate(form) {
 }
 
 const contactInfo = [
-  { icon: '📍', label: 'Address', value: '42 Travel Lane, Connaught Place, New Delhi 110001' },
+  { icon: '📍', label: 'Address', value: 'Proton Office, Saidpur, Karad' },
   { icon: '📞', label: 'Phone', value: '+91 98765 43210' },
-  { icon: '✉️', label: 'Email', value: 'hello@wanderlust.travel' },
-  { icon: '🕐', label: 'Working Hours', value: 'Mon – Sat: 9:00 AM – 8:00 PM' },
+  { icon: '✉️', label: 'Email', value: 'proton@gmail.com' },
+  { icon: '🕐', label: 'Working Hours', value: 'Mon – Sat: 10:00 AM – 6:00 PM' },
 ];
 
 export default function Contact({ addToast }) {
@@ -54,9 +54,9 @@ export default function Contact({ addToast }) {
       <section className="contact-hero">
         <div className="container contact-hero__inner">
           <span className="section-badge">📬 Get In Touch</span>
-          <h1 className="section-title">Contact Us</h1>
+          <h1 className="section-title">Contact Swaranjali Travels</h1>
           <div className="divider" />
-          <p className="section-subtitle">Have a question or ready to plan your next adventure? We'd love to hear from you.</p>
+          <p className="section-subtitle">Have a question or ready to book your next ride? We'd love to hear from you.</p>
         </div>
       </section>
 
@@ -64,9 +64,9 @@ export default function Contact({ addToast }) {
         <div className="container contact-layout">
           {/* Info Column */}
           <div className="contact-info">
-            <h2 className="contact-info__title">Let's Talk Travel</h2>
+            <h2 className="contact-info__title">Let's Connect</h2>
             <p className="contact-info__sub">
-              Our friendly team is available 6 days a week to help you plan the perfect trip or answer any questions.
+              Our friendly team is available Monday to Saturday to help you book the perfect ride or answer any questions.
             </p>
             <div className="contact-info__list">
               {contactInfo.map(({ icon, label, value }) => (
@@ -82,7 +82,7 @@ export default function Contact({ addToast }) {
             <div className="contact-map">
               <div className="contact-map__placeholder">
                 <span>🗺️</span>
-                <p>New Delhi, India</p>
+                <p>Karad, Maharashtra, India</p>
               </div>
             </div>
           </div>
@@ -94,12 +94,12 @@ export default function Contact({ addToast }) {
               <div className="contact-form__row">
                 <div className="form-group">
                   <label className="form-label" htmlFor="name">Full Name *</label>
-                  <input id="name" name="name" className={`form-input${errors.name ? ' error' : ''}`} placeholder="Rahul Verma" value={form.name} onChange={handleChange} />
+                  <input id="name" name="name" className={`form-input${errors.name ? ' error' : ''}`} placeholder="Your full name" value={form.name} onChange={handleChange} />
                   {errors.name && <span className="form-error">{errors.name}</span>}
                 </div>
                 <div className="form-group">
                   <label className="form-label" htmlFor="email">Email Address *</label>
-                  <input id="email" name="email" type="email" className={`form-input${errors.email ? ' error' : ''}`} placeholder="rahul@example.com" value={form.email} onChange={handleChange} />
+                  <input id="email" name="email" type="email" className={`form-input${errors.email ? ' error' : ''}`} placeholder="your@email.com" value={form.email} onChange={handleChange} />
                   {errors.email && <span className="form-error">{errors.email}</span>}
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default function Contact({ addToast }) {
                 </div>
                 <div className="form-group">
                   <label className="form-label" htmlFor="subject">Subject *</label>
-                  <input id="subject" name="subject" className={`form-input${errors.subject ? ' error' : ''}`} placeholder="Tour Package Enquiry" value={form.subject} onChange={handleChange} />
+                  <input id="subject" name="subject" className={`form-input${errors.subject ? ' error' : ''}`} placeholder="Ride Booking Enquiry" value={form.subject} onChange={handleChange} />
                   {errors.subject && <span className="form-error">{errors.subject}</span>}
                 </div>
               </div>

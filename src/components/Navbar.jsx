@@ -31,6 +31,7 @@ export default function Navbar() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/packages', label: 'Packages' },
+    { to: '/fleet', label: 'Our Fleet' },
     { to: '/about', label: 'About Us' },
     { to: '/contact', label: 'Contact' },
     { to: '/driver', label: 'Driver' },
@@ -40,9 +41,9 @@ export default function Navbar() {
     <nav className={`navbar${scrolled ? ' navbar--scrolled' : ''}`} ref={menuRef}>
       <div className="navbar__inner container">
         <Link to="/" className="navbar__logo" onClick={() => setMenuOpen(false)}>
-          <span className="navbar__logo-icon">✈</span>
+          <span className="navbar__logo-icon">🚗</span>
           <span className="navbar__logo-text">
-            Wanderlust<span className="navbar__logo-accent"> Travel</span>
+            Swaranjali<span className="navbar__logo-accent"> Travels</span>
           </span>
         </Link>
 

@@ -20,16 +20,16 @@ const stats = [
 ];
 
 const reasons = [
-  { icon: '🛡️', title: 'Safety First', desc: 'Every ride and tour is fully insured. Your safety is our highest priority, always.' },
-  { icon: '✨', title: 'Premium Comfort', desc: 'Luxury vehicles, hand-picked hotels, and curated experiences for every budget.' },
-  { icon: '💰', title: 'Best Value', desc: 'Transparent pricing with no hidden fees. Get premium experiences at honest prices.' },
-  { icon: '🧭', title: 'Expert Guides', desc: 'Our certified guides bring destinations to life with stories, culture and local insight.' },
+  { icon: '🛡️', title: 'Safety First', desc: 'Every ride is fully insured. Your safety is our highest priority, always.' },
+  { icon: '🧑‍✈️', title: 'Driver Included', desc: 'Professional, verified drivers with every booking — no extra charges, no hassle.' },
+  { icon: '💰', title: 'Best Value', desc: 'Transparent pricing with no hidden fees. Premium rides at honest, upfront prices.' },
+  { icon: '🚗', title: 'Premium Fleet', desc: 'From Swift to Innova Crysta — well-maintained, AC vehicles for every budget.' },
 ];
 
 const testimonials = [
-  { name: 'Siddhant Nikam', role: 'Entrepreneur, Mumbai', text: 'Wanderlust made our Mahabaleshwar trip absolutely magical. Every detail was perfect — from the luxury resort to the private viewpoints. I cannot recommend them enough!', rating: 5 },
-  { name: 'kedar Deshmukh', role: 'Software Engineer, Bangalore', text: 'The Hampi heritage tour was a journey through time! The local guides were knowledgeable and the stone chariot was breathtaking. 10/10 experience.', rating: 5 },
-  { name: 'Shantnau Deshmane', role: 'Doctor, Delhi', text: 'Booked a last-minute ride to the airport and was amazed by the service — prompt, professional, and the car was immaculate. Definitely my go-to now.', rating: 5 },
+  { name: 'Siddhant Nikam', role: 'Entrepreneur, Mumbai', text: 'Swaranjali Travels made our Mahabaleshwar trip absolutely magical. Every detail was perfect — from the comfortable Innova to the professional driver. Highly recommended!', rating: 5 },
+  { name: 'Kedar Deshmukh', role: 'Software Engineer, Pune', text: 'Booked a Tempo Traveller for our group trip to Hampi. The driver was knowledgeable, the vehicle was spotless, and the trip was unforgettable!', rating: 5 },
+  { name: 'Shantnau Deshmane', role: 'Doctor, Karad', text: 'Reliable, punctual, and always professional. Swaranjali Travels is my go-to for every outstation trip. The Swift Dzire is perfect for my family.', rating: 5 },
 ];
 
 function AnimatedCounter({ target, suffix }) {
@@ -70,17 +70,18 @@ export default function Home() {
       <section className="hero" style={{ backgroundImage: 'url(/hero.png)' }}>
         <div className="hero__overlay" />
         <div className="hero__content container">
-          <span className="section-badge">✈ Explore MH & KA</span>
+          <span className="section-badge">🚗 Swaranjali Travels</span>
           <h1 className="hero__title">
-            Your Journey to the<br />
-            <span className="text-gold">Sahyadris & Deccan</span> Begins Here
+            Your Journey, Our<br />
+            <span className="text-gold">Responsibility</span>
           </h1>
+          <p className="hero__tagline-marathi">प्रवास तुमचा जबाबदारी आमची</p>
           <p className="hero__subtitle">
-            Discover handcrafted tour packages and premium ride services that turn every trip into a lifetime memory.
+            Premium rides with professional drivers across Maharashtra & Karnataka. Book your ride in minutes.
           </p>
           <div className="hero__actions">
-            <Link to="/packages" className="btn btn-primary btn-lg">
-              Explore Packages
+            <Link to="/fleet" className="btn btn-primary btn-lg">
+              Explore Our Fleet
             </Link>
             <Link to="/booking" className="btn btn-secondary btn-lg">
               Book a Ride →
@@ -140,10 +141,10 @@ export default function Home() {
         <div className="container">
           <div className="text-center">
             <span className="section-badge">💎 Why Us</span>
-            <h2 className="section-title">Why Choose Wanderlust?</h2>
+            <h2 className="section-title">Why Choose Swaranjali Travels?</h2>
             <div className="divider" />
             <p className="section-subtitle">
-              We go beyond just booking trips. We craft experiences that stay with you forever.
+              We go beyond just booking rides. We deliver safe, comfortable journeys you can count on.
             </p>
           </div>
           <div className="why-us__grid">
@@ -192,12 +193,12 @@ export default function Home() {
       <section className="cta-banner">
         <div className="container cta-banner__inner">
           <div>
-            <h2 className="cta-banner__title">Ready to Start Your Adventure?</h2>
-            <p className="cta-banner__sub">Browse our exclusive packages or book a ride right now.</p>
+            <h2 className="cta-banner__title">Ready to Start Your Journey?</h2>
+            <p className="cta-banner__sub">Browse our fleet or book a ride right now.</p>
           </div>
           <div className="cta-banner__actions">
-            <Link to="/packages" className="btn btn-primary btn-lg">
-              View Packages
+            <Link to="/fleet" className="btn btn-primary btn-lg">
+              View Fleet
             </Link>
             <Link to="/booking" className="btn btn-secondary btn-lg">
               Book a Ride

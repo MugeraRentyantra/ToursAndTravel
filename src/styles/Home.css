@@ -32,6 +32,15 @@
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
+.hero__tagline-marathi {
+  font-size: 1.3rem;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
 .hero__subtitle {
   font-size: 1.15rem;
   color: rgba(255, 255, 255, 0.85);

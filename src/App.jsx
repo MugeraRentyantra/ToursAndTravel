@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Toast from './components/Toast';
 import Home from './pages/Home';
 import Packages from './pages/Packages';
+import Fleet from './pages/Fleet';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Booking from './pages/Booking';
@@ -36,6 +37,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home addToast={addToast} />} />
           <Route path="/packages" element={<Packages />} />
+          <Route path="/fleet" element={<Fleet />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact addToast={addToast} />} />
           <Route path="/booking" element={<Booking addToast={addToast} />} />
