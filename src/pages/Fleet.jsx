@@ -15,7 +15,7 @@ export default function Fleet() {
       {/* Hero */}
       <section className="fleet-hero">
         <div className="container fleet-hero__inner">
-          <span className="section-badge">🚗 Our Fleet</span>
+          <span className="section-badge"><img src="/logo.png" alt="" className="badge-logo" /> Our Fleet</span>
           <h1 className="section-title">Choose Your Perfect Ride</h1>
           <div className="divider" />
           <p className="section-subtitle">
@@ -65,7 +65,7 @@ export default function Fleet() {
 
           {filtered.length === 0 && (
             <div className="fleet-empty">
-              <span>🚗</span>
+              <span><img src="/logo.png" alt="" className="badge-logo" style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#fff' }} /></span>
               <p>No vehicles found in this category.</p>
             </div>
           )}

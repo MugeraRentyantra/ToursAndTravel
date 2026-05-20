@@ -28,7 +28,7 @@
 .navbar__logo {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 10px;
   font-family: var(--font-heading);
   font-size: 1.35rem;
   font-weight: 700;
@@ -38,13 +38,39 @@
   flex-shrink: 0;
 }
 
-.navbar__logo-icon {
-  font-size: 1.5rem;
-  filter: drop-shadow(0 0 6px rgba(201, 168, 76, 0.6));
+.navbar__logo-img {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #ffffff;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.4), 0 0 4px rgba(201, 168, 76, 0.2);
 }
 
-.navbar__logo-accent {
+.navbar__logo-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.navbar__logo-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
   color: var(--gold);
+  text-shadow: 0 1px 4px rgba(201, 168, 76, 0.25);
+}
+
+.navbar__logo-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 1px;
 }
 
 /* Nav Links */

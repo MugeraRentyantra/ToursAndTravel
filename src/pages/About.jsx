@@ -68,7 +68,7 @@ export default function About() {
           </div>
           <div className="about-story__visual">
             <div className="about-story__card about-story__card--1">
-              <span className="about-story__card-icon">🚗</span>
+              <span className="about-story__card-icon"><img src="/logo.png" alt="" className="badge-logo" style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#fff' }} /></span>
               <h4>8+ Vehicles</h4>
               <p>From Swift to Tempo Traveller</p>
             </div>

@@ -47,10 +47,15 @@ export default function Footer() {
       <div className="footer__main container">
         <div className="footer__col footer__col--brand">
           <Link to="/" className="footer__logo">
-            <span className="footer__logo-icon">🚗</span>
-            <span className="footer__logo-text">
-              Swaranjali<span className="text-gold"> Travels</span>
-            </span>
+            <img
+              src="/logo.png"
+              alt="Swaranjali Travels"
+              className="footer__logo-img"
+            />
+            <div className="footer__logo-wordmark">
+              <span className="footer__logo-name">Swaranjali</span>
+              <span className="footer__logo-subtitle">Tours & Travels</span>
+            </div>
           </Link>
           <div className="footer__tagline-wrapper">
             <span className="footer__tagline-marathi">प्रवास तुमचा जबाबदारी आमची</span>

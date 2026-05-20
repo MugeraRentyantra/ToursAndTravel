@@ -117,7 +117,7 @@ export default function Booking({ addToast }) {
     <div className="booking-page">
       <section className="booking-hero">
         <div className="container booking-hero__inner">
-          <span className="section-badge">🚗 Swaranjali Travels</span>
+          <span className="section-badge"><img src="/logo.png" alt="" className="badge-logo" /> Swaranjali Travels</span>
           <h1 className="section-title">Book Your Ride</h1>
           <div className="divider" />
           <p className="section-subtitle">Safe, comfortable, and always on time — प्रवास तुमचा जबाबदारी आमची</p>
@@ -167,7 +167,7 @@ export default function Booking({ addToast }) {
 
             {/* Vehicle */}
             <div className="booking-form__section">
-              <h3 className="booking-form__section-title">🚗 Choose Your Vehicle</h3>
+              <h3 className="booking-form__section-title"><img src="/logo.png" alt="" className="badge-logo" /> Choose Your Vehicle</h3>
               <div className="vehicle-selector">
                 {vehicles.map((v) => (
                   <button

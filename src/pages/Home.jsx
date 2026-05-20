@@ -70,7 +70,7 @@ export default function Home() {
       <section className="hero" style={{ backgroundImage: 'url(/hero.png)' }}>
         <div className="hero__overlay" />
         <div className="hero__content container">
-          <span className="section-badge">🚗 Swaranjali Travels</span>
+          <span className="section-badge"><img src="/logo.png" alt="" className="badge-logo" /> Swaranjali Travels</span>
           <h1 className="hero__title">
             Your Journey, Our<br />
             <span className="text-gold">Responsibility</span>

@@ -41,10 +41,15 @@ export default function Navbar() {
     <nav className={`navbar${scrolled ? ' navbar--scrolled' : ''}`} ref={menuRef}>
       <div className="navbar__inner container">
         <Link to="/" className="navbar__logo" onClick={() => setMenuOpen(false)}>
-          <span className="navbar__logo-icon">🚗</span>
-          <span className="navbar__logo-text">
-            Swaranjali<span className="navbar__logo-accent"> Travels</span>
-          </span>
+          <img
+            src="/logo.png"
+            alt="Swaranjali Travels"
+            className="navbar__logo-img"
+          />
+          <div className="navbar__logo-wordmark">
+            <span className="navbar__logo-name">Swaranjali</span>
+            <span className="navbar__logo-subtitle">Tours & Travels</span>
+          </div>
         </Link>
 
         <ul className={`navbar__links${menuOpen ? ' navbar__links--open' : ''}`}>

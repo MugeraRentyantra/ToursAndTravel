@@ -145,6 +145,18 @@ ul {
   margin-bottom: var(--space-md);
 }
 
+.badge-logo {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  object-fit: cover;
+  vertical-align: middle;
+  margin-right: 2px;
+  box-shadow: 0 0 4px rgba(201, 168, 76, 0.3);
+}
+
 .section-title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 4vw, 3rem);
