@@ -1,75 +1,113 @@
-# ✈ Wanderlust Travel & Rides
+# ✈ Swaranjali Tours & Travels
 
-A premium, frontend-only travel agency web app built with **React + Vite**.
+A premium, frontend-only travel agency and ride-booking web application built using **React (v19) + Vite (v8)**. The application offers a comprehensive showcase of tour packages, an interactive vehicle fleet browser, a complete ride-booking system, and a PIN-protected driver dashboard to manage ride requests in real-time.
 
-## Features
+---
 
-| Page | Description |
-|------|-------------|
-| **Home** | Hero, destination tiles, animated stats, Why Choose Us cards, testimonials, CTA |
-| **Tour Packages** | 6 destination cards (Bali, Paris, Rajasthan, Maldives, Manali, Kerala) |
-| **About Us** | Brand story, milestone timeline, team member cards |
-| **Contact** | Validated contact form with success toast |
-| **Book a Ride** | Full ride booking form → confirmation screen, stored in React context |
-| **Driver Dashboard** | PIN-protected (1234), live ride list, Accept/Decline actions, filter tabs |
+## 🌍 Live Demo & Routing Configuration
+This project is optimized for deployment on **Vercel**. 
 
-## Tech Stack
+### Client-Side Routing Fix (404 Error)
+Since this is a Single Page Application (SPA) using client-side routing (`react-router-dom`), refreshing any subpage (e.g., `/fleet`, `/booking`, or `/driver`) on a standard static hosting provider would normally trigger a `404 Not Found` error. 
 
-- **React 18** + **Vite**
-- **React Router v6**
-- **Plain CSS** (no Tailwind) — one CSS file per component
-- **Google Fonts**: Playfair Display + DM Sans
-- **RideContext** (React Context + useState) for global ride state
-- `sessionStorage` for driver PIN auth persistence
+To solve this, we have configured a `vercel.json` file in the project root:
+```json
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+```
+This configuration ensures that Vercel routes all client-side URL requests directly to `index.html`, allowing `react-router-dom` to take over and render the correct route dynamically.
 
-## Getting Started
+---
 
-```bash
-# 1. Install dependencies
-npm install
+## ✨ Features
 
-# 2. Start development server
-npm run dev
+| Page / Feature | Description |
+| :--- | :--- |
+| **🏠 Home Page** | Premium hero layout with a Marathi tagline (*प्रवास तुमचा जबाबदारी आमची*), popular destination tiles across Maharashtra & Karnataka, animated milestone counters, "Why Choose Us" sections, and client testimonials. |
+| **🌏 Tour Packages** | 7 handcrafted travel packages (Mahabaleshwar, Hampi, Coorg, Lonavala, Mysore, Gokarna, Matheran) detailing duration, pricing, rating, and included sightseeing/amenity lists. |
+| **🚗 Our Fleet** | Interactive catalog of vehicles (Hatchbacks, Sedans, SUVs, MPVs, Travellers) including Maruti Swift, Swift Dzire, Hyundai i10, Toyota Innova, Innova Crysta, Toyota Rumion, Kia Carens, and Tempo Traveller. Features client-side filtering by vehicle type. |
+| **🧑‍✈️ Book a Ride** | Complete booking form capturing passenger details, pickup/drop coordinates, date, time, vehicle selection, and special notes. Integrates directly with global React context. |
+| **🔐 Driver Dashboard** | PIN-protected admin portal (**Default PIN: 1234**) to view all bookings in real-time. Features status filters (All, Pending, Accepted, Declined), status modification action buttons (Accept/Decline), and dynamic dashboard metrics. |
+| **🌐 About Us** | The founding journey of Swaranjali Travels since 2018, operational milestones, our core mission, and profile cards of the core team members (Founder, Head of Operations, Customer Relations). |
+| **📬 Contact** | Validated client inquiry form with toast-based success alerts, company email, phone number, and physical office details. |
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend Core:** React 19 + Vite 8
+- **Routing:** React Router DOM v7
+- **Styling:** Vanilla CSS (component-scoped CSS files with CSS variables for dark-indigo/gold palette harmony)
+- **State Management:** React Context API (`RideContext.jsx`) for managing booking requests globally
+- **Auth Simulation:** `sessionStorage` for driver login persistence
+- **Feedback Alerts:** Custom-built React Toast notification system
+
+---
+
+## 📂 Project Structure
+
+```
+Tours/
+├── public/                 # Static assets (logos, vehicle images, backgrounds)
+├── src/
+│   ├── components/         # Reusable structural & UI components
+│   │   ├── Navbar.jsx      # Navigation bar with responsive mobile menu
+│   │   ├── Footer.jsx      # Multi-column footer
+│   │   ├── PackageCard.jsx # Tour package summary card
+│   │   ├── VehicleCard.jsx # Fleet vehicle listing card
+│   │   ├── RideCard.jsx    # Driver dashboard ride request card
+│   │   ├── Toast.jsx       # Alert notification toast container
+│   │   └── PolicySection.jsx # Booking policy component
+│   ├── context/
+│   │   └── RideContext.jsx # Global ride booking context and state provider
+│   ├── data/
+│   │   └── vehicles.js     # Data configuration for vehicles, policies, and pricing
+│   ├── pages/              # Routed page views
+│   │   ├── Home.jsx
+│   │   ├── Packages.jsx
+│   │   ├── Fleet.jsx
+│   │   ├── About.jsx
+│   │   ├── Contact.jsx
+│   │   ├── Booking.jsx
+│   │   └── Driver.jsx
+│   ├── styles/             # Dedicated CSS stylesheets matching components and pages
+│   ├── App.jsx             # Route definitions and layout assembly
+│   ├── index.css           # Global design system tokens and base styles
+│   └── main.jsx            # Application entry point
+├── vercel.json             # Vercel deployment and rewrite rules
+├── package.json            # Scripts and dependency versions
+└── vite.config.js          # Vite configuration
 ```
 
-Then open [http://localhost:5173](http://localhost:5173) in your browser.
+---
 
-## Driver Dashboard
+## 🚀 Getting Started Locally
 
-- Navigate to `/driver`
-- Enter PIN: **1234**
-- View pending, accepted, and declined ride requests
-- Accept or Decline rides — updates propagate instantly across the app
+To run the project on your local machine:
 
-## Project Structure
+1. **Clone the repository** (or navigate to your workspace directory).
+2. **Install all dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Start the local development server:**
+   ```bash
+   npm run dev
+   ```
+4. **Open the application:**
+   Navigate to [http://localhost:5173](http://localhost:5173) in your browser.
 
-```
-src/
-├── context/
-│   └── RideContext.jsx       # Global ride state (addRide, updateStatus)
-├── pages/
-│   ├── Home.jsx
-│   ├── Packages.jsx
-│   ├── About.jsx
-│   ├── Contact.jsx
-│   ├── Booking.jsx
-│   └── Driver.jsx
-├── components/
-│   ├── Navbar.jsx
-│   ├── Footer.jsx
-│   ├── Toast.jsx
-│   ├── RideCard.jsx
-│   └── PackageCard.jsx
-├── styles/
-│   └── (one CSS file per component/page)
-├── App.jsx
-└── main.jsx
-```
+---
 
-## Notes
+## ⚙️ Developer Reference Notes
 
-- No backend, no database — all state is in-memory (React useState)
-- Rides reset on page refresh (by design)
-- Only `sessionStorage` is used (driver login persists across refresh within same tab)
-- All validation is inline — no `window.alert()` anywhere
-- 2 sample rides are preloaded in `RideContext` so the dashboard is never empty
+- **Real-time Synchronization:** When a user books a ride via the "Book a Ride" form, it is immediately pushed to the global `RideContext`. Navigating to the **Driver Dashboard** will display the new request under the "Pending" tab.
+- **PIN Lock:** The driver portal requires entering `1234`. The unlocked status persists across page refreshes during the session via `sessionStorage`.
+- **Database Reset:** The app runs entirely on frontend memory. A hard refresh of the entire browser window will reset the ride bookings to the default preloaded sample requests (except driver dashboard authentication status).
+- **Responsive Layout:** The design system uses modern CSS Flexbox and CSS Grid layout techniques, ensuring complete visual compatibility on mobile, tablet, and desktop screens.
