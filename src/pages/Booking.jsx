@@ -38,7 +38,14 @@ export default function Booking({ addToast }) {
   const location = useLocation();
   const preselectedVehicle = location.state?.vehicleId || 'swift-dzire';
 
-  const [form, setForm] = useState({ ...initialForm, vehicle: preselectedVehicle });
+  const [form, setForm] = useState({
+    ...initialForm,
+    vehicle: preselectedVehicle,
+    pickup: location.state?.pickup || '',
+    drop: location.state?.drop || '',
+    phone: location.state?.phone || '',
+    notes: location.state?.tripType ? `Trip type: ${location.state.tripType}` : '',
+  });
   const [errors, setErrors] = useState({});
   const [confirmed, setConfirmed] = useState(null);
 

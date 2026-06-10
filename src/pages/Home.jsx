@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import QuickBookingWidget from '../components/QuickBookingWidget';
 import '../styles/Home.css';
-
 const destinations = [
   { name: 'Mahabaleshwar', country: 'Maharashtra, India', img: '/pkg-mahabaleshwar.png', tag: 'Hill Station' },
   { name: 'Hampi', country: 'Karnataka, India', img: '/pkg-hampi.png', tag: 'Heritage' },
@@ -63,29 +63,31 @@ function AnimatedCounter({ target, suffix }) {
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-export default function Home() {
+export default function Home({ addToast }) {
   return (
     <div className="home">
       {/* ── Hero ── */}
       <section className="hero" style={{ backgroundImage: 'url(/hero.png)' }}>
         <div className="hero__overlay" />
-        <div className="hero__content container">
-          <span className="section-badge"><img src="/logo.png" alt="" className="badge-logo" /> Swaranjali Travels</span>
-          <h1 className="hero__title">
-            Your Journey, Our<br />
-            <span className="text-gold">Responsibility</span>
-          </h1>
-          <p className="hero__tagline-marathi">प्रवास तुमचा जबाबदारी आमची</p>
-          <p className="hero__subtitle">
-            Premium rides with professional drivers across Maharashtra & Karnataka. Book your ride in minutes.
-          </p>
-          <div className="hero__actions">
-            <Link to="/fleet" className="btn btn-primary btn-lg">
-              Explore Our Fleet
-            </Link>
-            <Link to="/booking" className="btn btn-secondary btn-lg">
-              Book a Ride →
-            </Link>
+        <div className="hero__inner container">
+          <div className="hero__content">
+            <span className="section-badge"><img src="/logo.png" alt="" className="badge-logo" /> Swaranjali Travels</span>
+            <h1 className="hero__title">
+              Your Journey, Our<br />
+              <span className="text-gold">Responsibility</span>
+            </h1>
+            <p className="hero__tagline-marathi">प्रवास तुमचा जबाबदारी आमची</p>
+            <p className="hero__subtitle">
+              Premium rides with professional drivers across Maharashtra & Karnataka. Book your ride in minutes.
+            </p>
+            <div className="hero__actions">
+              <Link to="/fleet" className="btn btn-primary btn-lg">
+                Explore Our Fleet
+              </Link>
+            </div>
+          </div>
+          <div className="hero__widget">
+            <QuickBookingWidget addToast={addToast} />
           </div>
         </div>
         <div className="hero__scroll-hint">

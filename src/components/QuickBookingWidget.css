@@ -1,0 +1,338 @@
+/* ============================================
+   QUICK BOOKING WIDGET — Navy + Gold Theme
+   ============================================ */
+
+/* Card Container */
+.quick-booking-card {
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(10, 22, 40, 0.25), 
+              0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  font-family: var(--font-body);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.quick-booking-card:hover {
+  box-shadow: 0 25px 50px rgba(10, 22, 40, 0.32), 
+              0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Header bar — Gold gradient */
+.quick-booking-card__header {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: var(--navy);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 14px 20px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  border-bottom: 1.5px solid rgba(10, 22, 40, 0.12);
+}
+
+/* Form Body */
+.quick-booking-card__body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Tabs */
+.quick-booking-card__tabs {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.quick-booking-card__tab {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: #f3f4f6;
+  border: 1.5px solid transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+.quick-booking-card__tab:hover {
+  background: #e5e7eb;
+  color: var(--navy);
+}
+
+.quick-booking-card__tab.active {
+  background: var(--gold);
+  color: var(--navy);
+  border-color: var(--gold-dark);
+  box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+}
+
+/* Sub-options (Round Trip vs One Way) */
+.quick-booking-card__sub-options {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.trip-type-pill {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 14px;
+  background: #f3f4f6;
+  border: 1.5px solid transparent;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.trip-type-pill:hover {
+  background: #e5e7eb;
+}
+
+.trip-type-pill.selected {
+  background: rgba(201, 168, 76, 0.08);
+  border-color: var(--gold);
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* Custom Radio Dot */
+.radio-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+/* Round Trip dot */
+.round-trip-dot {
+  background: var(--gold);
+  border: 1.5px solid var(--gold);
+}
+
+/* One Way Trip dot */
+.one-way-dot {
+  background: var(--navy);
+  border: 2px solid var(--gold);
+}
+
+/* If pill is not selected, dim the dots */
+.trip-type-pill:not(.selected) .radio-dot {
+  opacity: 0.45;
+  background: #d1d5db;
+  border-color: #9ca3af;
+}
+
+/* Inputs wrapper */
+.quick-booking-card__inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Input group */
+.quick-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.quick-input {
+  width: 100%;
+  padding: 14px 44px 14px 16px;
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  background: #f9fafb;
+  border: 1.5px solid rgba(10, 22, 40, 0.08);
+  border-radius: 16px;
+  transition: all 0.25s ease;
+  line-height: 1.2;
+}
+
+.quick-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.quick-input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.15);
+}
+
+.quick-input-icon {
+  position: absolute;
+  right: 16px;
+  color: #9ca3af;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.quick-input:focus + .quick-input-icon {
+  color: var(--gold);
+}
+
+/* Destination inputs close/delete buttons */
+.destination-group .quick-input {
+  padding-right: 70px;
+}
+
+.remove-destination-btn {
+  position: absolute;
+  right: 42px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.remove-destination-btn:hover {
+  color: var(--error);
+}
+
+.destination-group .quick-input-icon {
+  right: 16px;
+}
+
+/* Add more city button */
+.add-city-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(201, 168, 76, 0.06);
+  border: 1.5px solid rgba(201, 168, 76, 0.2);
+  border-radius: 16px;
+  color: var(--navy);
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.add-city-btn:hover {
+  background: rgba(201, 168, 76, 0.12);
+  border-color: var(--gold);
+}
+
+.add-city-btn__icon {
+  display: flex;
+  align-items: center;
+  color: var(--gold-dark);
+}
+
+/* Phone input styling */
+.phone-group .phone-prefix {
+  position: absolute;
+  left: 16px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--navy);
+  pointer-events: none;
+}
+
+.phone-group .phone-input {
+  padding-left: 60px;
+}
+
+/* Submit Button — Gold gradient */
+.check-price-btn {
+  width: 100%;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: var(--navy);
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+
+.check-price-btn:hover {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.4);
+}
+
+.check-price-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(201, 168, 76, 0.25);
+}
+
+/* ── Tablet & Mobile ── */
+@media (max-width: 480px) {
+  .quick-booking-card {
+    border-radius: 20px;
+  }
+  .quick-booking-card__header {
+    font-size: 1.05rem;
+    padding: 12px 16px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  .quick-booking-card__body {
+    padding: 16px;
+    gap: 12px;
+  }
+  .quick-booking-card__tab,
+  .trip-type-pill,
+  .quick-input,
+  .add-city-btn,
+  .check-price-btn {
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+  .quick-booking-card__tab {
+    font-size: 0.95rem;
+  }
+  .phone-group .phone-input {
+    padding-left: 54px;
+  }
+  .phone-group .phone-prefix {
+    left: 12px;
+    font-size: 0.95rem;
+  }
+  .check-price-btn {
+    font-size: 1.05rem;
+    padding: 14px;
+  }
+}
