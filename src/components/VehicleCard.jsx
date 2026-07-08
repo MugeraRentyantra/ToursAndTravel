@@ -64,11 +64,6 @@ export default function VehicleCard({ vehicle }) {
           ))}
         </div>
 
-        <div className="v-card__driver-badge">
-          <span>🧑‍✈️</span>
-          <span>Driver Included</span>
-        </div>
-
         <button className="btn btn-primary v-card__btn" onClick={handleBook}>
           Book Now →
         </button>
