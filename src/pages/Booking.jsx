@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useRides } from '../context/RideContext';
 import { vehicles } from '../data/vehicles';
+import { getWhatsAppLink } from '../data/contact';
 import PolicySection from '../components/PolicySection';
+import PageHero from '../components/PageHero';
 import '../styles/Booking.css';
 
 const today = new Date().toISOString().split('T')[0];
 
 const initialForm = {
-  pickup: '', drop: '', date: '', time: '',
-  vehicle: 'swift-dzire', fullName: '', address: '',
-  phone: '', altPhone: '',
-  passengers: 1, notes: '',
+  pickup: '',
+  drop: '',
+  date: '',
+  time: '',
+  vehicle: 'swift-dzire',
+  fullName: '',
+  phone: '',
+  altPhone: '',
+  passengers: 1,
+  notes: '',
 };
 
 function validate(form) {
@@ -21,7 +28,6 @@ function validate(form) {
   if (!form.date) errs.date = 'Date is required.';
   if (!form.time) errs.time = 'Time is required.';
   if (!form.fullName.trim()) errs.fullName = 'Full name is required.';
-  if (!form.address.trim()) errs.address = 'Address is required.';
   if (!form.phone.trim()) errs.phone = 'Contact number is required.';
   else if (!/^\d{10}$/.test(form.phone.replace(/\s/g, ''))) errs.phone = 'Enter a valid 10-digit number.';
   if (!form.altPhone.trim()) errs.altPhone = 'Alternate contact is required.';
@@ -34,7 +40,6 @@ function generateId() {
 }
 
 export default function Booking({ addToast }) {
-  const { addRide } = useRides();
   const location = useLocation();
   const preselectedVehicle = location.state?.vehicleId || 'swift-dzire';
 
@@ -44,7 +49,11 @@ export default function Booking({ addToast }) {
     pickup: location.state?.pickup || '',
     drop: location.state?.drop || '',
     phone: location.state?.phone || '',
-    notes: location.state?.tripType ? `Trip type: ${location.state.tripType}` : '',
+    notes: location.state?.notes 
+      ? location.state.notes 
+      : location.state?.tripType 
+        ? `Trip type: ${location.state.tripType}` 
+        : '',
   });
   const [errors, setErrors] = useState({});
   const [confirmed, setConfirmed] = useState(null);
@@ -64,19 +73,52 @@ export default function Booking({ addToast }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const errs = validate(form);
-    if (Object.keys(errs).length) { setErrors(errs); return; }
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
 
+    const rideId = generateId();
     const ride = {
       ...form,
-      id: generateId(),
-      status: 'pending',
-      passengers: Number(form.passengers),
+      id: rideId,
       vehicleName: selectedVehicle.name,
+      vehicleType: selectedVehicle.type,
+      passengers: Number(form.passengers),
       createdAt: new Date().toISOString(),
     };
-    addRide(ride);
-    setConfirmed(ride);
-    addToast('Ride booked successfully!', 'success');
+
+    // Construct formatted WhatsApp message
+    const waMessage = `*Swaranjali Travels — New Booking Request*
+---------------------------------------
+*Booking ID:* ${ride.id}
+*Customer Name:* ${ride.fullName}
+*Phone:* ${ride.phone}
+*Alt Phone:* ${ride.altPhone}
+
+*Route Details:*
+📍 *Pickup:* ${ride.pickup}
+🏁 *Drop:* ${ride.drop}
+📅 *Date:* ${ride.date}
+⏰ *Time:* ${ride.time}
+
+*Vehicle & Passengers:*
+🚗 *Vehicle:* ${ride.vehicleName} (${ride.vehicleType})
+👥 *Passengers:* ${ride.passengers}
+${ride.notes ? `\n*Special Instructions:* ${ride.notes}` : ''}`;
+
+    // Generate link
+    const waLink = getWhatsAppLink(waMessage);
+
+    setConfirmed({
+      ...ride,
+      waLink,
+    });
+
+    addToast('Booking details prepared! Please send them via WhatsApp.', 'success');
+
+    // Automatically trigger WhatsApp in new window/tab
+    window.open(waLink, '_blank');
   };
 
   if (confirmed) {
@@ -85,11 +127,26 @@ export default function Booking({ addToast }) {
         <div className="container">
           <div className="confirmation">
             <div className="confirmation__icon">✓</div>
-            <h2 className="confirmation__title">Booking Confirmed!</h2>
-            <p className="confirmation__sub">Your ride has been successfully booked with Swaranjali Travels.</p>
+            <h2 className="confirmation__title">Booking Summary Ready!</h2>
+            <p className="confirmation__sub">
+              To complete your booking, please send the pre-filled message on WhatsApp to our customer relations team.
+            </p>
             <div className="confirmation__id">
               Booking ID: <strong>{confirmed.id}</strong>
             </div>
+
+            <div style={{ margin: '1.5rem 0' }}>
+              <a
+                href={confirmed.waLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary btn-lg"
+                style={{ background: '#25D366', borderColor: '#25D366', color: '#fff', display: 'inline-flex', gap: '8px' }}
+              >
+                💬 Send Message on WhatsApp
+              </a>
+            </div>
+
             <div className="confirmation__details">
               <div className="confirmation__row"><span>Pickup</span><span>{confirmed.pickup}</span></div>
               <div className="confirmation__row"><span>Drop</span><span>{confirmed.drop}</span></div>
@@ -97,7 +154,6 @@ export default function Booking({ addToast }) {
               <div className="confirmation__row"><span>Vehicle</span><span>{confirmed.vehicleName}</span></div>
               <div className="confirmation__row"><span>Passengers</span><span>{confirmed.passengers}</span></div>
               <div className="confirmation__row"><span>Name</span><span>{confirmed.fullName}</span></div>
-              <div className="confirmation__row"><span>Address</span><span>{confirmed.address}</span></div>
               <div className="confirmation__row"><span>Contact</span><span>{confirmed.phone}</span></div>
               <div className="confirmation__row"><span>Alt. Contact</span><span>{confirmed.altPhone}</span></div>
               <div className="confirmation__row confirmation__row--highlight">
@@ -107,12 +163,15 @@ export default function Booking({ addToast }) {
             </div>
             <div className="confirmation__actions">
               <button
-                className="btn btn-primary"
-                onClick={() => { setConfirmed(null); setForm(initialForm); }}
+                className="btn btn-secondary"
+                onClick={() => {
+                  setConfirmed(null);
+                  setForm(initialForm);
+                }}
               >
                 Book Another Ride
               </button>
-              <a href="/" className="btn btn-secondary">Go Home</a>
+              <a href="/" className="btn btn-navy">Go Home</a>
             </div>
           </div>
         </div>
@@ -122,24 +181,11 @@ export default function Booking({ addToast }) {
 
   return (
     <div className="booking-page">
-      <section className="booking-hero">
-        <div className="container booking-hero__inner">
-          <span className="section-badge"><img src="/logo.png" alt="" className="badge-logo" /> Swaranjali Travels</span>
-          <h1 className="section-title">Book Your Ride</h1>
-          <div className="divider" />
-          <p className="section-subtitle">Safe, comfortable, and always on time — प्रवास तुमचा जबाबदारी आमची</p>
-        </div>
-      </section>
-
-      {/* Driver Included Banner */}
-      <section className="booking-driver-banner">
-        <div className="container">
-          <div className="booking-driver-banner__inner">
-            <span>🧑‍✈️</span>
-            <span>✅ Professional driver included with every booking — no extra charges!</span>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        badge="🚗 Swaranjali Travels"
+        title="Book Your Ride"
+        subtitle="Safe, comfortable, and always on time — प्रवास तुमचा जबाबदारी आमची"
+      />
 
       <section className="section-padding-sm">
         <div className="container">
@@ -151,22 +197,51 @@ export default function Booking({ addToast }) {
               <div className="booking-form__grid">
                 <div className="form-group">
                   <label className="form-label" htmlFor="pickup">Pickup Location *</label>
-                  <input id="pickup" name="pickup" className={`form-input${errors.pickup ? ' error' : ''}`} placeholder="e.g. Karad Bus Stand" value={form.pickup} onChange={handleChange} />
+                  <input
+                    id="pickup"
+                    name="pickup"
+                    className={`form-input${errors.pickup ? ' error' : ''}`}
+                    placeholder="e.g. Karad Bus Stand"
+                    value={form.pickup}
+                    onChange={handleChange}
+                  />
                   {errors.pickup && <span className="form-error">{errors.pickup}</span>}
                 </div>
                 <div className="form-group">
                   <label className="form-label" htmlFor="drop">Drop Location *</label>
-                  <input id="drop" name="drop" className={`form-input${errors.drop ? ' error' : ''}`} placeholder="e.g. Pune Airport" value={form.drop} onChange={handleChange} />
+                  <input
+                    id="drop"
+                    name="drop"
+                    className={`form-input${errors.drop ? ' error' : ''}`}
+                    placeholder="e.g. Pune Airport"
+                    value={form.drop}
+                    onChange={handleChange}
+                  />
                   {errors.drop && <span className="form-error">{errors.drop}</span>}
                 </div>
                 <div className="form-group">
                   <label className="form-label" htmlFor="date">Date *</label>
-                  <input id="date" name="date" type="date" min={today} className={`form-input${errors.date ? ' error' : ''}`} value={form.date} onChange={handleChange} />
+                  <input
+                    id="date"
+                    name="date"
+                    type="date"
+                    min={today}
+                    className={`form-input${errors.date ? ' error' : ''}`}
+                    value={form.date}
+                    onChange={handleChange}
+                  />
                   {errors.date && <span className="form-error">{errors.date}</span>}
                 </div>
                 <div className="form-group">
                   <label className="form-label" htmlFor="time">Time *</label>
-                  <input id="time" name="time" type="time" className={`form-input${errors.time ? ' error' : ''}`} value={form.time} onChange={handleChange} />
+                  <input
+                    id="time"
+                    name="time"
+                    type="time"
+                    className={`form-input${errors.time ? ' error' : ''}`}
+                    value={form.time}
+                    onChange={handleChange}
+                  />
                   {errors.time && <span className="form-error">{errors.time}</span>}
                 </div>
               </div>
@@ -174,7 +249,7 @@ export default function Booking({ addToast }) {
 
             {/* Vehicle */}
             <div className="booking-form__section">
-              <h3 className="booking-form__section-title"><img src="/logo.png" alt="" className="badge-logo" /> Choose Your Vehicle</h3>
+              <h3 className="booking-form__section-title">Choose Your Vehicle</h3>
               <div className="vehicle-selector">
                 {vehicles.map((v) => (
                   <button
@@ -184,7 +259,14 @@ export default function Booking({ addToast }) {
                     onClick={() => handleVehicle(v.id)}
                   >
                     <div className="vehicle-card__image-container">
-                      <img src={v.image} alt={v.name} className="vehicle-card__img" onError={(e) => { e.target.src = '/suv.png'; }} />
+                      <img
+                        src={v.image}
+                        alt={v.name}
+                        className="vehicle-card__img"
+                        onError={(e) => {
+                          e.target.src = '/suv.png';
+                        }}
+                      />
                     </div>
                     <span className="vehicle-card__label">{v.name}</span>
                     <span className="vehicle-card__desc">{v.type} · {v.seats} seater</span>
@@ -200,37 +282,77 @@ export default function Booking({ addToast }) {
               <div className="booking-form__grid">
                 <div className="form-group">
                   <label className="form-label" htmlFor="fullName">Full Name *</label>
-                  <input id="fullName" name="fullName" className={`form-input${errors.fullName ? ' error' : ''}`} placeholder="Your full name" value={form.fullName} onChange={handleChange} />
+                  <input
+                    id="fullName"
+                    name="fullName"
+                    className={`form-input${errors.fullName ? ' error' : ''}`}
+                    placeholder="Your full name"
+                    value={form.fullName}
+                    onChange={handleChange}
+                  />
                   {errors.fullName && <span className="form-error">{errors.fullName}</span>}
                 </div>
                 <div className="form-group">
-                  <label className="form-label" htmlFor="address">Address *</label>
-                  <input id="address" name="address" className={`form-input${errors.address ? ' error' : ''}`} placeholder="Your full address" value={form.address} onChange={handleChange} />
-                  {errors.address && <span className="form-error">{errors.address}</span>}
-                </div>
-                <div className="form-group">
                   <label className="form-label" htmlFor="phone">Contact Number *</label>
-                  <input id="phone" name="phone" type="tel" className={`form-input${errors.phone ? ' error' : ''}`} placeholder="10-digit mobile number" value={form.phone} onChange={handleChange} />
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    className={`form-input${errors.phone ? ' error' : ''}`}
+                    placeholder="10-digit mobile number"
+                    value={form.phone}
+                    onChange={handleChange}
+                  />
                   {errors.phone && <span className="form-error">{errors.phone}</span>}
                 </div>
                 <div className="form-group">
                   <label className="form-label" htmlFor="altPhone">Alternate Contact Number *</label>
-                  <input id="altPhone" name="altPhone" type="tel" className={`form-input${errors.altPhone ? ' error' : ''}`} placeholder="Alternate 10-digit number" value={form.altPhone} onChange={handleChange} />
+                  <input
+                    id="altPhone"
+                    name="altPhone"
+                    type="tel"
+                    className={`form-input${errors.altPhone ? ' error' : ''}`}
+                    placeholder="Alternate 10-digit number"
+                    value={form.altPhone}
+                    onChange={handleChange}
+                  />
                   {errors.altPhone && <span className="form-error">{errors.altPhone}</span>}
                 </div>
                 <div className="form-group">
                   <label className="form-label" htmlFor="passengers">Passengers</label>
-                  <input id="passengers" name="passengers" type="number" min={1} max={selectedVehicle.seats} className="form-input" value={form.passengers} onChange={handleChange} />
+                  <input
+                    id="passengers"
+                    name="passengers"
+                    type="number"
+                    min={1}
+                    max={selectedVehicle.seats}
+                    className="form-input"
+                    value={form.passengers}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
               <div className="form-group" style={{ marginTop: '1rem' }}>
-                <label className="form-label" htmlFor="notes">Special Instructions <span style={{ fontWeight: 400, color: 'var(--text-light)' }}>(optional)</span></label>
-                <textarea id="notes" name="notes" rows={3} className="form-input" placeholder="e.g. Child seat required, extra luggage, etc." value={form.notes} onChange={handleChange} />
+                <label className="form-label" htmlFor="notes">
+                  Special Instructions{' '}
+                  <span style={{ fontWeight: 400, color: 'var(--text-light)' }}>
+                    (optional)
+                  </span>
+                </label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  rows={3}
+                  className="form-input"
+                  placeholder="e.g. Child seat required, extra luggage, package request details, etc."
+                  value={form.notes}
+                  onChange={handleChange}
+                />
               </div>
             </div>
 
             <button type="submit" className="btn btn-primary btn-lg booking-form__submit">
-              Confirm Booking →
+              Confirm & Book via WhatsApp →
             </button>
           </form>
 

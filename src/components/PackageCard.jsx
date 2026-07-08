@@ -47,7 +47,12 @@ export default function PackageCard({ pkg }) {
 
         <button
           className="btn btn-primary pkg-card__btn"
-          onClick={() => navigate('/booking')}
+          onClick={() => navigate('/booking', {
+            state: {
+              drop: pkg.destination,
+              notes: `Package: ${pkg.destination} (${pkg.duration})`,
+            }
+          })}
         >
           Book Now →
         </button>

@@ -31,10 +31,7 @@ export default function Navbar() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/packages', label: 'Packages' },
-    { to: '/fleet', label: 'Our Fleet' },
-    { to: '/about', label: 'About Us' },
-    { to: '/contact', label: 'Contact' },
-    { to: '/driver', label: 'Driver' },
+    { to: '/fleet', label: 'Fleet & Gallery' },
   ];
 
   return (
