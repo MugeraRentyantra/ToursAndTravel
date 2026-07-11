@@ -2,8 +2,8 @@
 // SWARANJALI TRAVELS — CONTACT DATA (SINGLE SOURCE)
 // ============================================
 
-export const businessPhone = '9067886738'; // primary WhatsApp & call number
-export const businessPhoneFormatted = '+91 90678 86738';
+export const businessPhone = '9518967710'; // primary WhatsApp & call number
+export const businessPhoneFormatted = '+91 95189 67710';
 
 export const contactInfo = [
   { icon: '📍', label: 'Address', value: 'Proton Office, Saidpur, Karad' },

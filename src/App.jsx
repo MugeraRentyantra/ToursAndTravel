@@ -10,7 +10,7 @@ import Fleet from './pages/Fleet';
 import Booking from './pages/Booking';
 import './index.css';
 
-export function useToast() {
+function useToast() {
   const [toasts, setToasts] = useState([]);
 
   const addToast = useCallback((message, type = 'success') => {
